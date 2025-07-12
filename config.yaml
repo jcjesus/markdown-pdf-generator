@@ -1,0 +1,197 @@
+# 🚀 SoundLink Markdown PDF Generator - Configuração Global
+
+# Configurações de Página
+page:
+  format: "A4"              # A4, A3, A2, A1, A0, Letter, Legal, Tabloid
+  orientation: "portrait"   # portrait, landscape
+  margins:
+    top: "20mm"
+    right: "15mm"
+    bottom: "20mm"
+    left: "15mm"
+  scale: 1.0
+  print_background: true
+
+# Configurações de Cabeçalho
+header:
+  enabled: true
+  height: "15mm"
+  template: |
+    <div style="font-size: 10px; color: #666; width: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee;">
+      <span class="header-left">{{document.title}}</span>
+      <span class="header-center">{{document.author}}</span>
+      <span class="header-right">{{date.formatted}}</span>
+    </div>
+  styles:
+    font_family: "Inter, sans-serif"
+    font_size: "10px"
+    color: "#666666"
+    background: "#ffffff"
+    border_bottom: "1px solid #eeeeee"
+    alignment:
+      left: "{{document.title}}"
+      center: "{{document.author}}"
+      right: "{{date.formatted}}"
+
+# Configurações de Rodapé
+footer:
+  enabled: true
+  height: "15mm"
+  template: |
+    <div style="font-size: 10px; color: #666; width: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee;">
+      <span class="footer-left">{{generator.name}} v{{generator.version}}</span>
+      <span class="footer-center">{{document.subtitle}}</span>
+      <span class="footer-right">Página {{page.current}} de {{page.total}}</span>
+    </div>
+  styles:
+    font_family: "Inter, sans-serif"
+    font_size: "10px"
+    color: "#666666"
+    background: "#ffffff"
+    border_top: "1px solid #eeeeee"
+    alignment:
+      left: "{{generator.name}} v{{generator.version}}"
+      center: "{{document.subtitle}}"
+      right: "Página {{page.current}} de {{page.total}}"
+
+# Configurações de Numeração
+page_numbers:
+  enabled: true
+  position: "footer-right"    # header-left, header-center, header-right, footer-left, footer-center, footer-right
+  format: "Página {current} de {total}"  # {current}, {total}, {roman}, {alpha}
+  start_from: 1
+  styles:
+    font_family: "Inter, sans-serif"
+    font_size: "10px"
+    color: "#666666"
+    font_weight: "normal"
+
+# Configurações de Alinhamento de Texto
+text_alignment:
+  paragraphs: "justify"       # left, center, right, justify
+  headers: "left"             # left, center, right
+  tables: "left"              # left, center, right
+  code_blocks: "left"         # left, center, right
+  blockquotes: "left"         # left, center, right
+  images: "center"            # left, center, right
+
+# Configurações de Tipografia
+typography:
+  body:
+    font_family: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font_size: "16px"
+    line_height: "1.6"
+    color: "#2c3e50"
+  headers:
+    font_family: "Inter, sans-serif"
+    font_weight: "600"
+    color: "#2c3e50"
+  code:
+    font_family: "JetBrains Mono, 'Fira Code', monospace"
+    font_size: "14px"
+    line_height: "1.4"
+
+# Configurações de Cores
+colors:
+  primary: "#3498db"
+  secondary: "#2980b9"
+  accent: "#e74c3c"
+  text: "#2c3e50"
+  background: "#ffffff"
+  muted: "#7f8c8d"
+  border: "#ecf0f1"
+
+# Configurações de Espaçamento
+spacing:
+  section_margin: "2rem"
+  paragraph_margin: "1rem"
+  header_margin: "2rem 0 1rem 0"
+  list_margin: "1rem 0"
+  table_margin: "1.5rem 0"
+  code_margin: "1.5rem 0"
+
+# Variáveis Dinâmicas Disponíveis
+variables:
+  document:
+    - title           # Título do documento
+    - subtitle        # Subtítulo
+    - author          # Autor
+    - description     # Descrição
+    - keywords        # Palavras-chave
+    - version         # Versão do documento
+  date:
+    - current         # Data atual (YYYY-MM-DD)
+    - formatted       # Data formatada (DD/MM/YYYY)
+    - long            # Data por extenso
+    - iso             # Data ISO
+  page:
+    - current         # Página atual
+    - total           # Total de páginas
+    - roman           # Página em romano (i, ii, iii)
+    - alpha           # Página em letras (a, b, c)
+  generator:
+    - name            # Nome do gerador
+    - version         # Versão do gerador
+    - url             # URL do projeto
+  stats:
+    - words           # Total de palavras
+    - lines           # Total de linhas
+    - chars           # Total de caracteres
+    - mermaid_count   # Número de diagramas
+
+# Templates Customizados
+templates:
+  minimal:
+    header:
+      enabled: false
+    footer:
+      template: |
+        <div style="text-align: center; font-size: 9px; color: #999;">
+          Página {{page.current}}
+        </div>
+  
+  corporate:
+    header:
+      template: |
+        <div style="display: flex; justify-content: space-between; padding: 0 20px; font-size: 10px; color: #333; border-bottom: 2px solid #3498db;">
+          <img src="logo.png" style="height: 20px;" alt="Logo">
+          <span>{{document.title}}</span>
+          <span>{{date.formatted}}</span>
+        </div>
+    footer:
+      template: |
+        <div style="display: flex; justify-content: space-between; padding: 0 20px; font-size: 9px; color: #666; border-top: 1px solid #ddd;">
+          <span>© {{date.year}} SoundLink</span>
+          <span>{{document.author}}</span>
+          <span>{{page.current}}/{{page.total}}</span>
+        </div>
+  
+  academic:
+    header:
+      template: |
+        <div style="text-align: center; font-size: 11px; color: #444; padding: 10px;">
+          <strong>{{document.title}}</strong>
+        </div>
+    footer:
+      template: |
+        <div style="display: flex; justify-content: space-between; font-size: 10px; color: #666; padding: 0 30px;">
+          <span>{{document.author}}</span>
+          <span>{{page.current}}</span>
+        </div>
+
+# Configurações Avançadas
+advanced:
+  break_pages:
+    before_sections: ["h1", "h2"]    # Quebra de página antes destes elementos
+    avoid_inside: ["table", "pre", "blockquote"]  # Evitar quebra dentro destes
+  watermark:
+    enabled: false
+    text: "RASCUNHO"
+    opacity: 0.1
+    angle: 45
+    color: "#cccccc"
+  security:
+    password_protection: false
+    allow_printing: true
+    allow_copying: true
+    allow_modifications: false 

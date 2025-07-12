@@ -1,0 +1,595 @@
+/* SoundLink Markdown PDF Generator - Professional Styles */
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background: #ffffff;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Document Container */
+.document-container {
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 20mm;
+    background: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    min-height: 297mm;
+}
+
+/* Document Header */
+.document-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid #3498db;
+}
+
+.document-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.document-subtitle {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.document-author {
+    font-size: 1.1rem;
+    color: #34495e;
+    font-weight: 500;
+}
+
+.document-date {
+    font-size: 0.9rem;
+    color: #95a5a6;
+    margin-top: 0.5rem;
+}
+
+/* Table of Contents */
+.table-of-contents {
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.table-of-contents h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.table-of-contents ul {
+    list-style: none;
+}
+
+.table-of-contents li {
+    margin: 0.5rem 0;
+}
+
+.table-of-contents a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.table-of-contents a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Content Styles */
+.document-content {
+    margin: 2rem 0;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50;
+    margin: 2rem 0 1rem 0;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h1 { 
+    font-size: 2.2rem; 
+    border-bottom: 2px solid #3498db; 
+    padding-bottom: 0.5rem; 
+}
+
+h2 { 
+    font-size: 1.8rem; 
+    border-bottom: 1px solid #bdc3c7; 
+    padding-bottom: 0.3rem; 
+}
+
+h3 { 
+    font-size: 1.5rem; 
+    color: #34495e; 
+}
+
+h4 { 
+    font-size: 1.3rem; 
+    color: #34495e; 
+}
+
+h5 { 
+    font-size: 1.1rem; 
+    color: #7f8c8d; 
+}
+
+h6 { 
+    font-size: 1rem; 
+    color: #7f8c8d; 
+}
+
+/* Paragraphs */
+p {
+    margin: 1rem 0;
+    text-align: justify;
+    hyphens: auto;
+}
+
+/* Lists */
+ul, ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+li {
+    margin: 0.5rem 0;
+}
+
+ul li::marker {
+    color: #3498db;
+}
+
+ol li::marker {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* Nested Lists */
+ul ul, ol ol, ul ol, ol ul {
+    margin: 0.5rem 0;
+}
+
+/* Task Lists */
+input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.2);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+th {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #e8f4f8;
+}
+
+/* Code Blocks */
+pre {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+code {
+    background: #ecf0f1;
+    color: #e74c3c;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-weight: 400;
+}
+
+/* Syntax Highlighting */
+.highlight {
+    background: #2c3e50;
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3498db;
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: #7f8c8d;
+    font-style: italic;
+    background: #f8f9fa;
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+blockquote p {
+    margin: 0.5rem 0;
+}
+
+blockquote cite {
+    font-size: 0.9rem;
+    color: #95a5a6;
+    font-style: normal;
+}
+
+/* Links */
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+}
+
+a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+}
+
+/* Mermaid Diagrams */
+.mermaid {
+    text-align: center;
+    margin: 2rem 0;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ecf0f1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.mermaid svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.mermaid-diagram {
+    text-align: center;
+    margin: 2rem 0;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ecf0f1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Horizontal Rules */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, #3498db, #2980b9);
+    margin: 2rem 0;
+    border-radius: 1px;
+}
+
+/* Strong and Emphasis */
+strong, b {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+em, i {
+    font-style: italic;
+    color: #34495e;
+}
+
+/* Mark/Highlight */
+mark {
+    background: #f1c40f;
+    padding: 0.1rem 0.2rem;
+    border-radius: 3px;
+}
+
+/* Abbreviations */
+abbr {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Definition Lists */
+dl {
+    margin: 1rem 0;
+}
+
+dt {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-top: 1rem;
+}
+
+dd {
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Footnotes */
+.footnote {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    vertical-align: super;
+}
+
+/* Document Footer */
+.document-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ecf0f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    page-break-inside: avoid;
+}
+
+.stats {
+    display: flex;
+    gap: 1rem;
+}
+
+.stats span {
+    background: #f8f9fa;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid #ecf0f1;
+}
+
+.generated-by {
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+.generation-date {
+    margin-top: 0.3rem;
+    font-size: 0.7rem;
+    color: #95a5a6;
+}
+
+/* Alerts/Admonitions */
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid;
+}
+
+.alert-info {
+    background: #d5edf8;
+    border-left-color: #3498db;
+    color: #2c3e50;
+}
+
+.alert-warning {
+    background: #fef9e7;
+    border-left-color: #f39c12;
+    color: #2c3e50;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    border-left-color: #e74c3c;
+    color: #2c3e50;
+}
+
+.alert-success {
+    background: #d4edda;
+    border-left-color: #27ae60;
+    color: #2c3e50;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white !important;
+        color: #000 !important;
+        font-size: 12pt;
+    }
+    
+    .document-container {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        min-height: auto;
+    }
+    
+    .document-header {
+        page-break-after: avoid;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+    }
+    
+    pre, blockquote, table {
+        page-break-inside: avoid;
+    }
+    
+    .table-of-contents {
+        page-break-after: always;
+    }
+    
+    .document-footer {
+        page-break-before: avoid;
+        margin-top: 2rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .stats {
+        margin-bottom: 1rem;
+    }
+    
+    a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+    
+    .mermaid, .mermaid-diagram {
+        page-break-inside: avoid;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .document-container {
+        padding: 1rem;
+    }
+    
+    .document-title {
+        font-size: 2rem;
+    }
+    
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.3rem; }
+    
+    .document-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .stats {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #1a1a1a;
+        color: #e0e0e0;
+    }
+    
+    .document-container {
+        background: #2d2d2d;
+        box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff;
+    }
+    
+    .table-of-contents {
+        background: #333333;
+        border-left-color: #3498db;
+    }
+    
+    pre {
+        background: #1e1e1e;
+        color: #d4d4d4;
+    }
+    
+    code {
+        background: #333333;
+        color: #e74c3c;
+    }
+    
+    blockquote {
+        background: #333333;
+        color: #b0b0b0;
+    }
+    
+    .mermaid, .mermaid-diagram {
+        background: #333333;
+        border-color: #555555;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus Styles */
+:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Selection Styles */
+::selection {
+    background: #3498db;
+    color: white;
+}
+
+::-moz-selection {
+    background: #3498db;
+    color: white;
+} 

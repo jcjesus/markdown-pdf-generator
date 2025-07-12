@@ -1,0 +1,208 @@
+# 🐍 Regras do Cursor para Projeto Python - Markdown PDF Generator
+
+## 🚨 LIMITAÇÃO DE CHAMADAS
+- MÁXIMO 25 chamadas de ferramentas por sessão
+- Priorize eficiência e minimize chamadas desnecessárias
+- Use chamadas paralelas quando possível
+- Planeje bem antes de executar ferramentas
+
+## 📋 REGRAS GERAIS PYTHON
+
+### Padrões de Código
+- Use Python 3.8+ como versão mínima
+- Siga PEP 8 para formatação
+- Use type hints sempre que possível
+- Prefira f-strings para formatação de strings
+- Use docstrings no formato Google/NumPy
+- Máximo 88 caracteres por linha (Black)
+
+### Estrutura de Projeto
+- Mantenha estrutura clara: src/, tests/, docs/
+- Use __init__.py em todos os pacotes
+- Separe lógica de negócio da interface
+- Implemente tratamento de erros adequado
+
+### Imports
+- Imports padrão primeiro
+- Imports de terceiros segundo  
+- Imports locais por último
+- Use imports absolutos quando possível
+- Agrupe imports por categoria
+
+## 🎯 REGRAS ESPECÍFICAS DO PROJETO
+
+### Markdown PDF Generator
+- Mantenha compatibilidade com Markdown padrão
+- Suporte completo para emojis e Mermaid
+- Processamento assíncrono sempre que possível
+- Limpeza automática de arquivos temporários
+- Logs detalhados para debugging
+
+### Dependências
+- Use ambiente virtual sempre
+- Mantenha requirements.txt atualizado
+- Prefira pymdown-extensions para extensões Markdown
+- Use Playwright para geração de PDF
+- Evite dependências desnecessárias
+
+### Tratamento de Erros
+- Capture erros específicos, não genéricos
+- Log erros adequadamente
+- Forneça mensagens de erro claras
+- Fail gracefully quando possível
+- Use try/except em operações I/O
+
+## 🔧 REGRAS DE DESENVOLVIMENTO
+
+### Testes
+- Escreva testes para toda funcionalidade nova
+- Use pytest como framework
+- Mantenha cobertura de testes > 80%
+- Testes unitários e de integração
+- Mocks para dependências externas
+
+### Performance
+- Use async/await para operações I/O
+- Minimize chamadas síncronas
+- Cache resultados quando apropriado
+- Otimize loops e operações de lista
+- Profile código quando necessário
+
+### Segurança
+- Valide todas as entradas
+- Sanitize dados de usuário
+- Use timeouts em operações de rede
+- Não exponha informações sensíveis
+- Validate file paths e extensions
+
+## 📝 REGRAS DE DOCUMENTAÇÃO
+
+### Código
+- Docstrings em todas as funções públicas
+- Comentários para lógica complexa
+- README.md atualizado e completo
+- Exemplos de uso claros
+- Changelog mantido
+
+### Commits
+- Mensagens descritivas e claras
+- Use emojis nos commits quando apropriado
+- Commits pequenos e focados
+- Referência issues quando relevante
+
+## 🎨 REGRAS DE ESTILO
+
+### Formatação
+- Use Black para formatação automática
+- Use isort para organizar imports
+- Use flake8 para linting
+- Use mypy para type checking
+- Pre-commit hooks recomendados
+
+### Nomenclatura
+- snake_case para variáveis e funções
+- PascalCase para classes
+- UPPER_CASE para constantes
+- Nomes descritivos e claros
+- Evite abreviações obscuras
+
+## 🔍 REGRAS DE DEBUGGING
+
+### Logs
+- Use logging module, não print()
+- Níveis apropriados: DEBUG, INFO, WARNING, ERROR
+- Formato consistente de logs
+- Não logue informações sensíveis
+- Logs estruturados quando possível
+
+### Debugging
+- Use debugger em vez de print() temporário
+- Remova código de debug antes do commit
+- Use assert para condições que devem ser verdadeiras
+- Testes para reproduzir bugs
+
+## 🚀 REGRAS DE DEPLOYMENT
+
+### Ambiente
+- Use .env para variáveis de ambiente
+- Não commite secrets ou credenciais
+- Use diferentes configs para dev/prod
+- Validate environment na inicialização
+
+### Packaging
+- Use setup.py ou pyproject.toml
+- Versioning semântico
+- Metadados completos do projeto
+- Entry points quando apropriado
+
+## 🛡️ REGRAS DE SEGURANÇA
+
+### Validação
+- Valide todos os inputs
+- Sanitize dados antes de processar
+- Use whitelist em vez de blacklist
+- Timeout em operações que podem travar
+
+### Dependências
+- Audit dependências regularmente
+- Use pip-audit para verificar vulnerabilidades
+- Mantenha dependências atualizadas
+- Remove dependências não utilizadas
+
+## 📦 REGRAS ESPECÍFICAS - MARKDOWN PDF
+
+### Processamento
+- Validar sintaxe Markdown antes de processar
+- Suporte para front matter YAML
+- Renderização de Mermaid via Playwright
+- Otimização de imagens automática
+
+### Output
+- PDF com metadados completos
+- Estilos CSS profissionais
+- Suporte a diferentes formatos (A4, A3, etc.)
+- Margens e layout responsivos
+
+### Compatibilidade
+- Suporte completo para emojis Unicode
+- Extensões Markdown mais utilizadas
+- Compatibilidade com diferentes navegadores
+- Fallbacks para recursos não suportados
+
+## 🎯 PRIORIDADES DE DESENVOLVIMENTO
+
+1. **Funcionalidade**: Código deve funcionar corretamente
+2. **Performance**: Otimizar operações críticas
+3. **Segurança**: Validar inputs e sanitizar dados
+4. **Manutenibilidade**: Código limpo e bem documentado
+5. **Testabilidade**: Cobertura de testes adequada
+
+## 🚫 EVITAR
+
+- Imports * (star imports)
+- Variáveis globais desnecessárias
+- Código duplicado
+- Funções muito longas (>50 linhas)
+- Classes muito grandes
+- Dependências circulares
+- Hardcoded values
+- Prints em código de produção
+- Commits com TODO/FIXME
+- Código comentado sem explicação
+
+## ✅ PREFERIR
+
+- Composição sobre herança
+- Funções puras quando possível
+- Immutable data structures
+- Context managers para recursos
+- Generators para grandes datasets
+- Pathlib para manipulação de paths
+- Enum para constantes relacionadas
+- Dataclasses para estruturas de dados
+- Async/await para I/O
+- Type hints para melhor IDE support
+
+---
+
+**Lembre-se**: Estas regras existem para manter qualidade, consistência e eficiência do código. Sempre considere o contexto específico do projeto markdown-pdf-generator ao aplicá-las. 
