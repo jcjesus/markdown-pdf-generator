@@ -11,7 +11,7 @@ from playwright.async_api import async_playwright
 import logging
 
 # Import configuration manager
-from ..config import ConfigManager, TemplateVariables
+from config import ConfigManager, TemplateVariables
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -104,8 +104,9 @@ class PDFGenerator:
                 
                 # Wait for Mermaid diagrams to render if any
                 try:
-                    await page.wait_for_selector('.mermaid svg', timeout=10000)
-                    await page.wait_for_timeout(2000)  # Additional wait
+                    await page.wait_for_selector('.mermaid-diagram svg', timeout=30000)
+                    await page.wait_for_timeout(5000)  # Additional wait for complete rendering
+                    logger.info("Mermaid diagrams rendered successfully")
                 except:
                     logger.info("No Mermaid diagrams found or timeout")
                 

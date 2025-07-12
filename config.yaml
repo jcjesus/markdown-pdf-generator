@@ -17,10 +17,16 @@ header:
   enabled: true
   height: "15mm"
   template: |
-    <div style="font-size: 10px; color: #666; width: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee;">
-      <span class="header-left">{{document.title}}</span>
-      <span class="header-center">{{document.author}}</span>
-      <span class="header-right">{{date.formatted}}</span>
+    <div style="font-size: 10px; color: #666; width: 100%; display: table; table-layout: fixed; border-bottom: 1px solid #eee; height: 15mm; line-height: 15mm;">
+      <div style="display: table-cell; width: 33.33%; text-align: left; vertical-align: middle; padding-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="header-left">{{document.title}}</span>
+      </div>
+      <div style="display: table-cell; width: 33.33%; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="header-center">{{document.author}}</span>
+      </div>
+      <div style="display: table-cell; width: 33.33%; text-align: right; vertical-align: middle; padding-right: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="header-right">{{date.formatted}}</span>
+      </div>
     </div>
   styles:
     font_family: "Inter, sans-serif"
@@ -38,10 +44,16 @@ footer:
   enabled: true
   height: "15mm"
   template: |
-    <div style="font-size: 10px; color: #666; width: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee;">
-      <span class="footer-left">{{generator.name}} v{{generator.version}}</span>
-      <span class="footer-center">{{document.subtitle}}</span>
-      <span class="footer-right">Página {{page.current}} de {{page.total}}</span>
+    <div style="font-size: 10px; color: #666; width: 100%; display: table; table-layout: fixed; border-top: 1px solid #eee; height: 15mm; line-height: 15mm;">
+      <div style="display: table-cell; width: 33.33%; text-align: left; vertical-align: middle; padding-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="footer-left">{{generator.name}} v{{generator.version}}</span>
+      </div>
+      <div style="display: table-cell; width: 33.33%; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="footer-center">{{document.subtitle}}</span>
+      </div>
+      <div style="display: table-cell; width: 33.33%; text-align: right; vertical-align: middle; padding-right: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="footer-right">Página {{page.current}} de {{page.total}}</span>
+      </div>
     </div>
   styles:
     font_family: "Inter, sans-serif"
@@ -79,7 +91,7 @@ text_alignment:
 typography:
   body:
     font_family: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-    font_size: "16px"
+    font_size: "12px"
     line_height: "1.6"
     color: "#2c3e50"
   headers:
@@ -88,7 +100,7 @@ typography:
     color: "#2c3e50"
   code:
     font_family: "JetBrains Mono, 'Fira Code', monospace"
-    font_size: "14px"
+    font_size: "12px"
     line_height: "1.4"
 
 # Configurações de Cores
@@ -146,37 +158,61 @@ templates:
       enabled: false
     footer:
       template: |
-        <div style="text-align: center; font-size: 9px; color: #999;">
-          Página {{page.current}}
+        <div style="font-size: 9px; color: #999; width: 100%; display: table; table-layout: fixed; height: 15mm; line-height: 15mm;">
+          <div style="display: table-cell; width: 100%; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span>Página {{page.current}}</span>
+          </div>
         </div>
   
   corporate:
     header:
       template: |
-        <div style="display: flex; justify-content: space-between; padding: 0 20px; font-size: 10px; color: #333; border-bottom: 2px solid #3498db;">
-          <img src="logo.png" style="height: 20px;" alt="Logo">
-          <span>{{document.title}}</span>
-          <span>{{date.formatted}}</span>
+        <div style="font-size: 10px; color: #333; width: 100%; display: table; table-layout: fixed; border-bottom: 2px solid #3498db; height: 15mm; line-height: 15mm;">
+          <div style="display: table-cell; width: 33.33%; text-align: left; vertical-align: middle; padding-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span style="font-weight: 600; color: #3498db;">🏢 {{document.title}}</span>
+          </div>
+          <div style="display: table-cell; width: 33.33%; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span style="font-weight: 500;">{{document.author}}</span>
+          </div>
+          <div style="display: table-cell; width: 33.33%; text-align: right; vertical-align: middle; padding-right: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span style="color: #666;">{{date.formatted}}</span>
+          </div>
         </div>
     footer:
       template: |
-        <div style="display: flex; justify-content: space-between; padding: 0 20px; font-size: 9px; color: #666; border-top: 1px solid #ddd;">
-          <span>© {{date.year}} SoundLink</span>
-          <span>{{document.author}}</span>
-          <span>{{page.current}}/{{page.total}}</span>
+        <div style="font-size: 9px; color: #666; width: 100%; display: table; table-layout: fixed; border-top: 1px solid #ddd; height: 15mm; line-height: 15mm;">
+          <div style="display: table-cell; width: 33.33%; text-align: left; vertical-align: middle; padding-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span>{{document.author}}</span>
+          </div>
+          <div style="display: table-cell; width: 33.33%; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span>{{document.subtitle}} • SoundLink © {{date.year}}</span>
+          </div>
+          <div style="display: table-cell; width: 33.33%; text-align: right; vertical-align: middle; padding-right: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span style="font-weight: 500;">{{page.current}}/{{page.total}}</span>
+          </div>
         </div>
   
   academic:
     header:
       template: |
-        <div style="text-align: center; font-size: 11px; color: #444; padding: 10px;">
-          <strong>{{document.title}}</strong>
+        <div style="font-size: 11px; color: #444; width: 100%; display: table; table-layout: fixed; border-bottom: 1px solid #eee; height: 15mm; line-height: 15mm;">
+          <div style="display: table-cell; width: 100%; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <strong style="color: #2c3e50;">{{document.title}}</strong>
+            {% if document.subtitle %} - <small style="color: #7f8c8d; font-weight: normal;">{{document.subtitle}}</small>{% endif %}
+          </div>
         </div>
     footer:
       template: |
-        <div style="display: flex; justify-content: space-between; font-size: 10px; color: #666; padding: 0 30px;">
-          <span>{{document.author}}</span>
-          <span>{{page.current}}</span>
+        <div style="font-size: 10px; color: #666; width: 100%; display: table; table-layout: fixed; border-top: 1px solid #eee; height: 15mm; line-height: 15mm;">
+          <div style="display: table-cell; width: 33.33%; text-align: left; vertical-align: middle; padding-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span>{{document.author}}</span>
+          </div>
+          <div style="display: table-cell; width: 33.33%; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span style="color: #999;">{{generator.name}}</span>
+          </div>
+          <div style="display: table-cell; width: 33.33%; text-align: right; vertical-align: middle; padding-right: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span style="font-weight: 500;">{{page.current}}</span>
+          </div>
         </div>
 
 # Configurações Avançadas

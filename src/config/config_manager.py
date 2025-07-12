@@ -5,7 +5,7 @@ Configuration Manager for PDF generation settings
 
 import os
 import yaml
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Union
 from datetime import datetime
 from pathlib import Path
 import logging
@@ -178,24 +178,36 @@ class ConfigManager:
     def _get_default_header_template(self) -> str:
         """Get default header template"""
         return '''
-<div style="font-size: 10px; color: #666; width: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee;">
-    <span class="header-left">{{document.title}}</span>
-    <span class="header-center">{{document.author}}</span>
-    <span class="header-right">{{date.formatted}}</span>
+<div style="font-size: 10px; color: #666; width: 100%; display: table; table-layout: fixed; border-bottom: 1px solid #eee; height: 15mm; line-height: 15mm;">
+    <div style="display: table-cell; width: 33.33%; text-align: left; vertical-align: middle; padding-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="header-left">{{document.title}}</span>
+    </div>
+    <div style="display: table-cell; width: 33.33%; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="header-center">{{document.author}}</span>
+    </div>
+    <div style="display: table-cell; width: 33.33%; text-align: right; vertical-align: middle; padding-right: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="header-right">{{date.formatted}}</span>
+    </div>
 </div>
         '''.strip()
     
     def _get_default_footer_template(self) -> str:
         """Get default footer template"""
         return '''
-<div style="font-size: 10px; color: #666; width: 100%; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee;">
-    <span class="footer-left">{{generator.name}}</span>
-    <span class="footer-center">{{document.subtitle}}</span>
-    <span class="footer-right">Página {{page.current}} de {{page.total}}</span>
+<div style="font-size: 10px; color: #666; width: 100%; display: table; table-layout: fixed; border-top: 1px solid #eee; height: 15mm; line-height: 15mm;">
+    <div style="display: table-cell; width: 33.33%; text-align: left; vertical-align: middle; padding-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="footer-left">{{generator.name}} v{{generator.version}}</span>
+    </div>
+    <div style="display: table-cell; width: 33.33%; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="footer-center">{{document.subtitle}}</span>
+    </div>
+    <div style="display: table-cell; width: 33.33%; text-align: right; vertical-align: middle; padding-right: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <span class="footer-right">Página {{page.current}} de {{page.total}}</span>
+    </div>
 </div>
         '''.strip()
     
-    def get_page_config(self, document_metadata: Dict = None) -> Dict[str, Any]:
+    def get_page_config(self, document_metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Get page configuration merged with document metadata
         
@@ -218,7 +230,7 @@ class ConfigManager:
         
         return config
     
-    def get_header_template(self, template_name: str = None) -> str:
+    def get_header_template(self, template_name: Optional[str] = None) -> str:
         """
         Get header template by name or default
         
@@ -235,7 +247,7 @@ class ConfigManager:
         
         return self.config['header']['template']
     
-    def get_footer_template(self, template_name: str = None) -> str:
+    def get_footer_template(self, template_name: Optional[str] = None) -> str:
         """
         Get footer template by name or default
         
@@ -272,7 +284,7 @@ class ConfigManager:
             logger.error(f"Error rendering template: {e}")
             return template
     
-    def get_pdf_options(self, document_metadata: Dict = None) -> Dict[str, Any]:
+    def get_pdf_options(self, document_metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Get complete PDF generation options
         

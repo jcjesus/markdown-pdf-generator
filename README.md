@@ -42,6 +42,26 @@ pip install -r requirements-dev.txt
 
 ## 🚀 Uso
 
+### 🔧 **Configurar Variáveis no PDF**
+
+Para personalizar cabeçalho e rodapé, adicione variáveis YAML no início do arquivo:
+
+```yaml
+---
+title: "Relatório de Vendas"
+subtitle: "Janeiro 2024"
+author: "João Silva"
+description: "Relatório mensal de vendas"
+version: "1.0"
+---
+```
+
+**Resultado no PDF:**
+- **Cabeçalho:** `Relatório de Vendas | João Silva | 15/01/2024`
+- **Rodapé:** `SoundLink PDF Generator | Janeiro 2024 | Página 1 de 3`
+
+📚 **[Guia Completo de Variáveis](docs/README-variaveis.md)**
+
 ### CLI Interface
 
 ```bash
@@ -129,7 +149,34 @@ asyncio.run(main())
 
 ## 🎨 Exemplos
 
-### Documento com Emojis
+### 📂 **Arquivos de Exemplo Prontos**
+
+#### 1. **Exemplo Simples** (recomendado para iniciantes)
+```bash
+# Copie e edite este exemplo
+cp examples/exemplo-simples.md meu-documento.md
+python3 src/main.py meu-documento.md
+```
+
+#### 2. **Exemplo Completo** (com todos os recursos)
+```bash
+# Exemplo avançado com Mermaid, tabelas, emojis
+cp examples/exemplo-completo.md meu-relatorio.md
+python3 src/main.py meu-relatorio.md
+```
+
+### 🔧 **Configuração Básica**
+```yaml
+---
+title: "Relatório de Vendas"
+subtitle: "Janeiro 2024"
+author: "João Silva"
+description: "Relatório mensal de vendas"
+version: "1.0"
+---
+```
+
+### 😊 **Documento com Emojis**
 ```markdown
 # 🚀 Título Principal
 
@@ -143,7 +190,7 @@ Este documento contém **emojis** nativos! 😊
 🎉 **Sucesso!** Emojis funcionando perfeitamente!
 ```
 
-### Documento com Mermaid
+### 📊 **Documento com Mermaid**
 ```markdown
 # Fluxo do Sistema
 
@@ -167,19 +214,6 @@ sequenceDiagram
     D-->>A: Resultado
     A-->>U: Resposta
 ```
-```
-
-### Metadata YAML
-```markdown
----
-title: "Relatório Mensal"
-subtitle: "Análise de Performance"
-author: "SoundLink Team"
-date: "2024-01-15"
-description: "Relatório detalhado de performance do sistema"
----
-
-# Conteúdo do documento...
 ```
 
 ## ⚙️ Configuração
@@ -216,7 +250,19 @@ description: "Relatório detalhado de performance do sistema"
 
 ## 🧪 Testes
 
-### Executar Testes
+### 🚀 **Testar com Exemplos Prontos**
+```bash
+# Exemplo simples (recomendado para começar)
+python3 src/main.py examples/exemplo-simples.md
+
+# Exemplo completo (todos os recursos)
+python3 src/main.py examples/exemplo-completo.md
+
+# Gerar HTML para debug
+python3 src/main.py examples/exemplo-simples.md --html
+```
+
+### 🔧 **Executar Testes do Sistema**
 ```bash
 # Todos os testes
 python -m pytest tests/
@@ -228,14 +274,10 @@ python -m pytest tests/test_parser.py
 python -m pytest tests/ --cov=src/
 ```
 
-### Testar com Arquivo de Exemplo
-```bash
-# Gerar PDF do arquivo de exemplo
-python3 src/main.py tests/fixtures/sample.md -o exemplo.pdf
-
-# Gerar HTML do arquivo de exemplo
-python3 src/main.py tests/fixtures/sample.md --html
-```
+### 📁 **Arquivos de Exemplo Incluídos**
+- `examples/exemplo-simples.md` - Exemplo básico com variáveis
+- `examples/exemplo-completo.md` - Exemplo avançado com todos os recursos
+- `tests/fixtures/sample.md` - Arquivo de teste do sistema
 
 ## 🔧 Desenvolvimento
 
@@ -335,6 +377,27 @@ Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](L
 - **Mermaid** - Diagramas incríveis
 - **Markdown** - Formatação simples
 - **SoundLink Team** - Desenvolvimento
+
+## 🔗 Links Rápidos
+
+### 📚 **Documentação**
+- [**Como Configurar Variáveis no PDF**](docs/README-variaveis.md) - Guia prático
+- [**Configuração Completa**](docs/configuracao-variaveis.md) - Documentação detalhada
+- [**Documentação Completa**](docs/README.md) - Índice de toda documentação
+
+### 📂 **Exemplos Prontos**
+- [**Exemplo Simples**](examples/exemplo-simples.md) - Para iniciantes
+- [**Exemplo Completo**](examples/exemplo-completo.md) - Todos os recursos
+
+### 🎯 **Começar Agora**
+```bash
+# 1. Copie o exemplo simples
+cp examples/exemplo-simples.md meu-documento.md
+
+# 2. Edite o arquivo com suas informações
+# 3. Gere o PDF
+python3 src/main.py meu-documento.md
+```
 
 ---
 

@@ -69,7 +69,7 @@ class HTMLGenerator:
         {% if toc %}
         <nav class="table-of-contents">
             <h2>Índice</h2>
-            {{ toc|safe }}
+            {{ toc_formatted|safe }}
         </nav>
         {% endif %}
         
@@ -140,7 +140,7 @@ body {
     line-height: 1.6;
     color: #2c3e50;
     background: #ffffff;
-    font-size: 16px;
+    font-size: 12px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -164,7 +164,7 @@ body {
 }
 
 .document-title {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #2c3e50;
     margin-bottom: 1rem;
@@ -196,35 +196,67 @@ body {
 /* Table of Contents */
 .table-of-contents {
     background: #f8f9fa;
-    border-left: 4px solid #3498db;
+    border: 1px solid #dee2e6;
     padding: 1.5rem;
     margin: 2rem 0;
-    border-radius: 0 8px 8px 0;
+    border-radius: 8px;
+    page-break-after: always;
 }
 
 .table-of-contents h2 {
     color: #2c3e50;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
 }
 
 .table-of-contents ul {
     list-style: none;
+    padding-left: 0;
 }
 
 .table-of-contents li {
-    margin: 0.5rem 0;
+    margin: 0.3rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+.table-of-contents li:last-child {
+    border-bottom: none;
 }
 
 .table-of-contents a {
-    color: #3498db;
+    color: #2c3e50;
     text-decoration: none;
     transition: color 0.2s;
+    flex: 1;
+    font-size: 0.9rem;
 }
 
 .table-of-contents a:hover {
-    color: #2980b9;
-    text-decoration: underline;
+    color: #3498db;
+}
+
+/* TOC indentation for different levels */
+.table-of-contents .toc-h1 { padding-left: 0; font-weight: 600; }
+.table-of-contents .toc-h2 { padding-left: 1rem; }
+.table-of-contents .toc-h3 { padding-left: 2rem; font-size: 0.85rem; }
+.table-of-contents .toc-h4 { padding-left: 3rem; font-size: 0.8rem; }
+.table-of-contents .toc-h5 { padding-left: 4rem; font-size: 0.75rem; }
+.table-of-contents .toc-h6 { padding-left: 5rem; font-size: 0.7rem; }
+
+/* TOC page numbers */
+.toc-page-number {
+    color: #7f8c8d;
+    font-size: 0.8rem;
+    margin-left: 1rem;
+    min-width: 2rem;
+    text-align: right;
 }
 
 /* Content Styles */
@@ -240,12 +272,12 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
 }
 
-h1 { font-size: 2.2rem; border-bottom: 2px solid #3498db; padding-bottom: 0.5rem; }
-h2 { font-size: 1.8rem; border-bottom: 1px solid #bdc3c7; padding-bottom: 0.3rem; }
-h3 { font-size: 1.5rem; color: #34495e; }
-h4 { font-size: 1.3rem; color: #34495e; }
-h5 { font-size: 1.1rem; color: #7f8c8d; }
-h6 { font-size: 1rem; color: #7f8c8d; }
+h1 { font-size: 1.4rem; border-bottom: 2px solid #3498db; padding-bottom: 0.5rem; }
+h2 { font-size: 1.2rem; border-bottom: 1px solid #bdc3c7; padding-bottom: 0.3rem; }
+h3 { font-size: 1.1rem; color: #34495e; }
+h4 { font-size: 1rem; color: #34495e; }
+h5 { font-size: 0.95rem; color: #7f8c8d; }
+h6 { font-size: 0.9rem; color: #7f8c8d; }
 
 /* Paragraphs */
 p {
@@ -345,6 +377,17 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Hide permalink symbols */
+.headerlink, .anchorlink {
+    display: none !important;
+}
+
+/* Hide permalink symbols in headings */
+h1 .headerlink, h2 .headerlink, h3 .headerlink, 
+h4 .headerlink, h5 .headerlink, h6 .headerlink {
+    display: none !important;
+}
+
 /* Images */
 img {
     max-width: 100%;
@@ -367,6 +410,44 @@ img {
 .mermaid svg {
     max-width: 100%;
     height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.mermaid-diagram {
+    text-align: center;
+    margin: 2rem 0;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ecf0f1;
+    page-break-inside: avoid;
+}
+
+.mermaid-diagram svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.mermaid-placeholder {
+    text-align: center;
+    margin: 2rem 0;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ecf0f1;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.mermaid-placeholder::before {
+    content: "🎨 Carregando diagrama...";
 }
 
 /* Horizontal Rules */
@@ -414,7 +495,8 @@ em, i {
     body {
         background: white !important;
         color: #000 !important;
-        font-size: 12pt;
+        font-size: 10pt;
+        line-height: 1.4;
     }
     
     .document-container {
@@ -499,6 +581,49 @@ em, i {
         
         return html_content
     
+    def format_toc_with_page_numbers(self, toc_html: str) -> str:
+        """
+        Format TOC HTML to include page numbers and better styling
+        
+        Args:
+            toc_html: Original TOC HTML from markdown parser
+            
+        Returns:
+            Formatted TOC HTML with page numbers and styling
+        """
+        if not toc_html:
+            return ""
+        
+        import re
+        from bs4 import BeautifulSoup
+        
+        try:
+            # Parse the TOC HTML
+            soup = BeautifulSoup(toc_html, 'html.parser')
+            
+            # Find all list items
+            for li in soup.find_all('li'):
+                # Add CSS classes based on heading level
+                link = li.find('a')
+                if link and link.get('href'):
+                    # Extract heading level from href (e.g., #heading-1)
+                    href = link.get('href', '')
+                    
+                    # Determine level based on nesting
+                    level = len(li.find_parents('ul')) + 1
+                    li['class'] = li.get('class', []) + [f'toc-h{level}']
+                    
+                    # Add page number placeholder (will be calculated during PDF generation)
+                    page_span = soup.new_tag('span', **{'class': 'toc-page-number'})
+                    page_span.string = '•'  # Placeholder, PDF generator will replace
+                    li.append(page_span)
+            
+            return str(soup)
+            
+        except Exception as e:
+            logger.warning(f"Failed to format TOC: {e}")
+            return toc_html
+    
     def generate_html(self, parsed_data: Dict, mermaid_svgs: Optional[Dict[str, str]] = None) -> str:
         """
         Generate complete HTML document from parsed markdown data
@@ -516,6 +641,7 @@ em, i {
         template_data = {
             'content': parsed_data['html'],
             'toc': parsed_data['toc'],
+            'toc_formatted': self.format_toc_with_page_numbers(parsed_data['toc']),
             'metadata': parsed_data['metadata'],
             'stats': parsed_data['stats'],
             'css_content': self.custom_css or self.get_default_css()

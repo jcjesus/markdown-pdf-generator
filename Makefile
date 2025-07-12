@@ -142,4 +142,50 @@ logs:
 benchmark:
 	@echo "⚡ Executando benchmark..."
 	@time make example
-	@echo "✅ Benchmark concluído!" 
+	@echo "✅ Benchmark concluído!"
+
+# Comandos de Configuração
+config-help:
+	@echo "⚙️  Comandos de Configuração"
+	@echo "=========================="
+	@echo "  make config-validate  - Validar configuração"
+	@echo "  make config-example   - Executar exemplos de configuração"
+	@echo "  make config-templates - Listar templates disponíveis"
+	@echo "  make config-edit      - Editar config.yaml"
+	@echo "  make config-reset     - Resetar configuração padrão"
+
+# Validar configuração
+config-validate:
+	@echo "🔍 Validando configuração..."
+	@. venv/bin/activate && python3 -c "from src.config import ConfigManager; cm = ConfigManager(); warnings = cm.validate_config(); print('✅ Configuração válida!' if not warnings else '⚠️  Avisos: ' + ', '.join(warnings))"
+
+# Executar exemplos de configuração
+config-example:
+	@echo "📚 Executando exemplos de configuração..."
+	@. venv/bin/activate && python3 examples/exemplo-configuracao.py
+
+# Listar templates
+config-templates:
+	@echo "🎭 Templates disponíveis:"
+	@. venv/bin/activate && python3 -c "from src.config import ConfigManager; cm = ConfigManager(); templates = cm.list_templates(); print('   • ' + '\n   • '.join(templates) if templates else '   Nenhum template configurado')"
+
+# Editar configuração
+config-edit:
+	@echo "📝 Abrindo config.yaml..."
+	@${EDITOR:-nano} config.yaml
+
+# Resetar configuração
+config-reset:
+	@echo "🔄 Resetando configuração para padrões..."
+	@. venv/bin/activate && python3 -c "from src.config import ConfigManager; cm = ConfigManager(); cm.update_config(cm._get_default_config()); print('✅ Configuração resetada!')"
+
+# Gerar com template específico
+template:
+	@if [ -z "$(FILE)" ] || [ -z "$(TEMPLATE)" ]; then \
+		echo "❌ Uso: make template FILE=documento.md TEMPLATE=corporate"; \
+		echo "📋 Templates: minimal, corporate, academic"; \
+		exit 1; \
+	fi
+	@echo "🎭 Gerando PDF com template: $(TEMPLATE)"
+	@. venv/bin/activate && python3 src/main.py $(FILE) --template $(TEMPLATE) $(ARGS)
+	@echo "✅ PDF gerado com template $(TEMPLATE)!" 

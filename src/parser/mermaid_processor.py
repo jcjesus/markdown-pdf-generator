@@ -21,7 +21,7 @@ class MermaidProcessor:
     Process Mermaid diagrams to SVG using Playwright
     """
     
-    def __init__(self, timeout: int = 30000, scale: float = 2.0):
+    def __init__(self, timeout: int = 60000, scale: float = 2.0):
         """
         Initialize Mermaid processor
         
@@ -50,64 +50,91 @@ class MermaidProcessor:
             justify-content: center;
             align-items: center;
             min-height: 300px;
+            text-align: center;
         }
         .mermaid svg {
             max-width: 100%;
             height: auto;
         }
+        #diagram-container {
+            width: 100%;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
-    <div class="mermaid">
-        {mermaid_content}
+    <div id="diagram-container">
+        <div class="mermaid">
+{mermaid_content}
+        </div>
     </div>
     <script>
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default',
-            themeVariables: {
-                primaryColor: '#3498db',
-                primaryTextColor: '#2c3e50',
-                primaryBorderColor: '#2980b9',
-                lineColor: '#34495e',
-                sectionBkgColor: '#ecf0f1',
-                altSectionBkgColor: '#bdc3c7',
-                gridColor: '#95a5a6',
-                secondaryColor: '#e74c3c',
-                tertiaryColor: '#f39c12'
-            },
-            flowchart: {
-                useMaxWidth: true,
-                htmlLabels: true,
-                curve: 'basis'
-            },
-            sequence: {
-                diagramMarginX: 50,
-                diagramMarginY: 10,
-                actorMargin: 50,
-                width: 150,
-                height: 65,
-                boxMargin: 10,
-                boxTextMargin: 5,
-                noteMargin: 10,
-                messageMargin: 35,
-                mirrorActors: true,
-                bottomMarginAdj: 1,
-                useMaxWidth: true,
-                rightAngles: false,
-                showSequenceNumbers: false
-            },
-            gantt: {
-                titleTopMargin: 25,
-                barHeight: 20,
-                fontSe: 11,
-                sidePadding: 75,
-                leftPadding: 75,
-                gridLineStartPadding: 35,
-                fontSize: 11,
-                fontFamily: '"Open Sans", sans-serif',
-                numberSectionStyles: 4,
-                axisFormat: '%Y-%m-%d'
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default',
+                    securityLevel: 'loose',
+                    themeVariables: {
+                        primaryColor: '#3498db',
+                        primaryTextColor: '#2c3e50',
+                        primaryBorderColor: '#2980b9',
+                        lineColor: '#34495e',
+                        sectionBkgColor: '#ecf0f1',
+                        altSectionBkgColor: '#bdc3c7',
+                        gridColor: '#95a5a6',
+                        secondaryColor: '#e74c3c',
+                        tertiaryColor: '#f39c12'
+                    },
+                    flowchart: {
+                        useMaxWidth: true,
+                        htmlLabels: true,
+                        curve: 'basis'
+                    },
+                    sequence: {
+                        diagramMarginX: 50,
+                        diagramMarginY: 10,
+                        actorMargin: 50,
+                        width: 150,
+                        height: 65,
+                        boxMargin: 10,
+                        boxTextMargin: 5,
+                        noteMargin: 10,
+                        messageMargin: 35,
+                        mirrorActors: true,
+                        bottomMarginAdj: 1,
+                        useMaxWidth: true,
+                        rightAngles: false,
+                        showSequenceNumbers: false
+                    },
+                    gantt: {
+                        titleTopMargin: 25,
+                        barHeight: 20,
+                        fontSize: 11,
+                        sidePadding: 75,
+                        leftPadding: 75,
+                        gridLineStartPadding: 35,
+                        fontFamily: '"Open Sans", sans-serif',
+                        numberSectionStyles: 4,
+                        axisFormat: '%Y-%m-%d'
+                    }
+                });
+                
+                // Force rendering after a small delay
+                setTimeout(function() {
+                    try {
+                        mermaid.run();
+                        console.log('Mermaid rendering completed');
+                    } catch (error) {
+                        console.error('Error during mermaid.run():', error);
+                    }
+                }, 100);
+                
+            } catch (error) {
+                console.error('Error initializing Mermaid:', error);
             }
         });
     </script>
@@ -126,19 +153,27 @@ class MermaidProcessor:
         Returns:
             SVG content as string or None if failed
         """
+        temp_html_path = None
         try:
+            logger.info(f"Rendering diagram {diagram_id}...")
+            
             # Create temporary HTML file
             html_content = self.mermaid_html_template.format(
                 mermaid_content=mermaid_content
             )
             
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.html', delete=False) as f:
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.html', delete=False, encoding='utf-8') as f:
                 f.write(html_content)
                 temp_html_path = f.name
             
+            logger.debug(f"Created temporary HTML file: {temp_html_path}")
+            
             async with async_playwright() as p:
-                # Launch browser
-                browser = await p.chromium.launch(headless=True)
+                # Launch browser with more options
+                browser = await p.chromium.launch(
+                    headless=True,
+                    args=['--no-sandbox', '--disable-setuid-sandbox']
+                )
                 page = await browser.new_page()
                 
                 # Set viewport for consistent rendering
@@ -147,18 +182,40 @@ class MermaidProcessor:
                 # Navigate to the HTML file
                 await page.goto(f"file://{temp_html_path}")
                 
-                # Wait for Mermaid to render
-                await page.wait_for_selector('.mermaid svg', timeout=self.timeout)
-                await page.wait_for_timeout(1000)  # Additional wait for rendering
+                # Wait for page to load
+                await page.wait_for_load_state('networkidle')
+                
+                # Wait for diagram container to be ready
+                await page.wait_for_selector('#diagram-container', timeout=5000)
+                
+                # Wait for Mermaid to initialize and render
+                try:
+                    await page.wait_for_selector('.mermaid svg', timeout=self.timeout)
+                    logger.info(f"SVG found for diagram {diagram_id}")
+                except Exception as e:
+                    logger.warning(f"SVG not found immediately for {diagram_id}, trying alternative approach: {e}")
+                    
+                    # Try to force render
+                    await page.evaluate("""
+                        if (window.mermaid) {
+                            window.mermaid.run();
+                        }
+                    """)
+                    
+                    # Wait a bit more
+                    await page.wait_for_timeout(5000)
+                    
+                    # Try again with longer timeout
+                    await page.wait_for_selector('.mermaid svg', timeout=30000)
+                
+                # Additional wait for complete rendering
+                await page.wait_for_timeout(3000)
                 
                 # Get the SVG element
                 svg_element = await page.query_selector('.mermaid svg')
                 if not svg_element:
-                    logger.error(f"No SVG found for diagram {diagram_id}")
+                    logger.error(f"No SVG found for diagram {diagram_id} after all attempts")
                     return None
-                
-                # Extract SVG content
-                svg_content = await svg_element.inner_html()
                 
                 # Get the outer HTML to include the SVG tag
                 svg_outer = await svg_element.evaluate('element => element.outerHTML')
@@ -174,7 +231,7 @@ class MermaidProcessor:
         except Exception as e:
             logger.error(f"Failed to render diagram {diagram_id}: {e}")
             # Clean up temporary file if it exists
-            if 'temp_html_path' in locals():
+            if temp_html_path and os.path.exists(temp_html_path):
                 try:
                     os.unlink(temp_html_path)
                 except:

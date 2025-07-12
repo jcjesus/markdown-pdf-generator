@@ -60,8 +60,10 @@ class MarkdownParser:
             },
             'markdown.extensions.toc': {
                 'anchorlink': True,
-                'permalink': True,
+                'permalink': False,
                 'toc_depth': 6,
+                'title': 'Índice',
+                'separator': '-',
             },
             'markdown.extensions.tables': {},
             'markdown.extensions.fenced_code': {},
