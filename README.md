@@ -1,4 +1,4 @@
-# 🚀 SoundLink Markdown PDF Generator
+# 🚀 Markdown PDF Generator
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
@@ -13,7 +13,7 @@
 - 😊 **Emojis Nativos**: Suporte completo para emojis Unicode e :shortcodes:
 - 📊 **Tabelas Profissionais**: Formatação moderna e responsiva
 - 💻 **Syntax Highlighting**: Código com destaque de sintaxe
-- 🎨 **Estilos Customizáveis**: CSS profissional com tema SoundLink
+- 🎨 **Estilos Customizáveis**: CSS profissional com design moderno
 - 📱 **Responsivo**: Design que funciona em todos os tamanhos
 - 🔄 **Processamento Assíncrono**: Performance otimizada
 - 🧹 **Auto-limpeza**: Arquivos temporários são automaticamente removidos
@@ -58,7 +58,7 @@ version: "1.0"
 
 **Resultado no PDF:**
 - **Cabeçalho:** `Relatório de Vendas | João Silva | 15/01/2024`
-- **Rodapé:** `SoundLink PDF Generator | Janeiro 2024 | Página 1 de 3`
+- **Rodapé:** `PDF Generator | Janeiro 2024 | Página 1 de 3`
 
 📚 **[Guia Completo de Variáveis](docs/README-variaveis.md)**
 
@@ -367,16 +367,16 @@ Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](L
 
 ## 🤝 Suporte
 
-- 📧 **Email**: dev@soundlink.com.br
-- 📂 **Issues**: [GitHub Issues](https://github.com/soundlink/markdown-pdf-generator/issues)
-- 📚 **Docs**: [Documentation](https://docs.soundlink.com.br)
+- 📧 **E-mail**: mainjesus@gmail.com
+- 📂 **Issues**: [GitHub Issues](https://github.com/jcjesus/markdown-pdf-generator/issues)
+- 📚 **Docs**: [Documentation](docs/README.md)
 
 ## 🎉 Agradecimentos
 
 - **Playwright** - Engine de renderização
 - **Mermaid** - Diagramas incríveis
 - **Markdown** - Formatação simples
-- **SoundLink Team** - Desenvolvimento
+- **Development Team** - Desenvolvimento
 
 ## 🔗 Links Rápidos
 
@@ -401,6 +401,4 @@ python3 src/main.py meu-documento.md
 
 ---
 
-**Feito com ❤️ pela equipe SoundLink** 🚀
-
-![SoundLink Logo](https://soundlink.com.br/logo.png) 
+**Feito com ❤️ por Julio Jesus** 🚀 
